@@ -15,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all()->sortByDesc('id');
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,7 +37,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validateData = $request->validate(
+            [
+                'title' => 'required | min: 5| max: 255',
+                'image' => 'nullable | image | max: 255',
+                'body' => 'required'
+            ]
+        );
+
+        ddd($validateData);
+        // Post::create($validateData);
+        // return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -47,7 +59,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
