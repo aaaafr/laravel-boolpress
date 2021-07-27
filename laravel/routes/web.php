@@ -13,11 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+// Pagine non connesse ad un  modello
+
+Route::get('/', 'PageController@index')->name('home');
+Route::get('about', 'PageController@about')->name('about');
+Route::get('contacts', 'PageController@contacts')->name('contacts');
+
+// pagine dei post
+
+Route::get('posts', 'PostController@index')->name('posts.index');
+Route::get('posts/{post}', 'PostController@show')->name('posts.show');
+
+
+
+
+Auth::routes(['register' => false]);
 
 
 
@@ -25,3 +36,4 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->name('admin.')->
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('posts', PostController::class);
 });
+

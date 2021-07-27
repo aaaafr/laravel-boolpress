@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -15,8 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortByDesc('id');
-        return view('admin.posts.index', compact('posts'));
+        $posts =  Post::orderBy('id', 'DESC')->paginate(10);
+        return view('guests.posts.index',  compact('posts'));
     }
 
     /**
@@ -26,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        //
     }
 
     /**
@@ -37,16 +36,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // ddd($request->all());
-        $validateData = $request->validate([
-            'title'=> 'required | min:5 | max:255',
-            'image' => 'nullable | max:255',
-            'body' => 'required'
-        ]);
-
-        Post::create($validateData);
-        return redirect()->route('admin.posts.index');
-
+        //
     }
 
     /**
@@ -57,7 +47,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.posts.show', compact('post'));
+        return view('guests.posts.show', compact('post'));
     }
 
     /**
@@ -68,7 +58,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit',  compact('post'));
+        //
     }
 
     /**
@@ -80,14 +70,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $validateData = $request->validate([
-            'title'=> 'required | min:5 | max:255',
-            'image' => 'nullable | max:255',
-            'body' => 'required'
-        ]);
-
-        $post->update($validateData);
-        return redirect()->route('admin.posts.index');
+        //
     }
 
     /**
@@ -98,7 +81,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
-        return redirect()->route('admin.posts.index');
+        //
     }
 }
