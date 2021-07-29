@@ -13,7 +13,7 @@
         </ul>
     </div>
 @endif
-<form action="{{route('admin.posts.update', $post->id)}}" method="post">
+<form action="{{route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
 
     @csrf
     @method('PUT')
@@ -22,10 +22,15 @@
       <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="add a title" aria-describedby="titleHelper" value="{{$post->title}}">
       <small id="titleHelper" class="text-muted">Type a title for the current post, max 255 char</small>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="image">Cover Image</label>
       <input type="text" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="add a url" aria-describedby="imageHelper" value="{{$post->image}}">
       <small id="imageHelper" class="text-muted">Add url</small>
+    </div> -->
+    <div class="form-group">
+      <label for="image">Replace Cover Image</label>
+      <img src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}}">
+      <input type="file" name="image" id="image">
     </div>
     <div class="form-group">
       <label for="body">Body</label>

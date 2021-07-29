@@ -5,7 +5,7 @@
 
 
 <div class="container">
-<img class="card-img-top" src="{{$post->image}}" alt="{{$post->title}}">
+<img class="card-img-top" src="{{asset('storage/' .  $post->image)}}" alt="{{$post->title}}">
  <h1 class="display-1">{{$post->title}}</h1>
  <p class="card-text">{{$post->body}}</p>
 

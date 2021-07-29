@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PageController@index')->name('home');
 Route::get('about', 'PageController@about')->name('about');
 Route::get('contacts', 'PageController@contacts')->name('contacts');
+Route::post('contacts', 'PageController@sendContactForm')->name('contacts.send');
 
 // pagine dei post
 
@@ -28,7 +29,8 @@ Route::get('posts/{post}', 'PostController@show')->name('posts.show');
 
 
 
-Auth::routes(['register' => false]);
+// Auth::routes(['register' => false]);
+Auth::routes();
 
 
 
@@ -37,3 +39,7 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->name('admin.')->
     Route::resource('posts', PostController::class);
 });
 
+
+
+
+// tabella per categories
