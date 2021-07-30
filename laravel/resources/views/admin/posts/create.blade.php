@@ -38,6 +38,16 @@
       <label for="body">Body</label>
       <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="4">{{old('body')}}</textarea>
     </div>
+
+    <div class="form-group">
+      <label for="category_id">Categories</label>
+      <select  class="form-control" name="category_id" id="category_id">
+        <option selected disabled>select category</option>
+        @foreach($categories as $category)
+        <option value="{{$category->id}}">{{$category->name}}</option>
+        @endforeach
+      </select>
+    </div>
     <button type="submit" class="btn btn-success">Submit</button>
 
 
