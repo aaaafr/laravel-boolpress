@@ -27,7 +27,9 @@ Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('posts/{post}', 'PostController@show')->name('posts.show');
 
 
-
+Route::get('vue-posts', function(){
+    return view('posts');
+});
 
 // Auth::routes(['register' => false]);
 Auth::routes();
@@ -40,6 +42,3 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->name('admin.')->
 });
 
 
-
-
-// tabella per categories
